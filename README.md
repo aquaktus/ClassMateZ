@@ -1,2 +1,2 @@
-# ClassMateZ
-the super awesome app that is ClassMateZ
+# classMatez
+An app to meet awesome people!

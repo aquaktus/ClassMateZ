@@ -1,0 +1,1 @@
+this is a file so that git notices the notes folder but in here we can add all the notes we have on our progress and issues
