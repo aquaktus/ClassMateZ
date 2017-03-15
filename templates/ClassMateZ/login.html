@@ -1,44 +1,165 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
+
+
+
 	<body>
-		<h1>Login</h1>
 
-			<dir class="class">
-				<form id="login_form" method="post" action="{% url 'login' %}">
-				Username: <input type="text" name="username" value="" size="50" />
-				<br />
-				Password: <input type="password" name="password" value="" size="50" />
-				<br />
-				<input type="submit" value="submit" />
-				</form>
+		    <img class="classmatez" src="https://drive.google.com/uc?export=view&id=0B8UxcfUvqYgfc1l2YzhmTW1Lb3c">
+
+
+
+		   	<dir class="a-box">
+		   	    <h2>Description</h3>
+			    <p>
+			        ClassMatez is a web application designed to help students at
+                    university connect with their classmates, make friends and
+                    meet new people across their courses.
+                </p>
+
 			</dir>
+
+			<dir class="b-box">
+			    <form action="/action_page.php">
+
+                      <div class="container">
+                            <label><b>Username</b></label>
+                            <input type="text" placeholder="Enter Username" name="uname" required>
+
+                            <label><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="psw" required>
+
+                            <input type="checkbox" checked="checked"> Remember me
+                            <span class="psw">Forgot <a href="#">password?</a></span>
+                            <button type="submit">Login</button>
+
+
+                      </div>
+
+                      <div class="sign-up">
+                            No account? <a href="/ClassMateZ/signup.html">Create one!</a>
+
+                      </div>
+                </form>
+			</dir>
+
+
+
+
+
+
+    	<style>
+
+
+
+                        HTML {	background-image: url("https://drive.google.com/uc?export=view&id=0B8UxcfUvqYgfTzdhV2JPZXdrMUE");
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                background-attachment: fixed;
+}
+
+
+
+
+
+
+    	body {
+        	max-width: 940px;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+            margin-top:300px;
+            background-image: url("gradient_bg.png");
+
+    	}
+
+    	.classmatez {
+            padding-bottom:15px;
+
+    	}
+
+
+    	.a-box {
+    	    width: 45%;
+    	    height: 250px;
+    	    float:left;
+    	    border-right:1px solid white;
+    	}
+
+
+    	.b-box {
+    	    width: 45%;
+    	    height: 250px;
+    	    float:right;
+
+    	}
+
+
+
+        /* Full-width inputs */
+        input[type=text], input[type=password] {
+            border-radius: 15px;
+            width: 100%;
+            padding: 14px 20px;
+            display: inline-block;
+            border: 1px solid black #ccc;
+            box-sizing: border-box;
+
+
+
+
+
+
+        }
+
+        /* Set a style for all buttons */
+        button{
+            background-color: #4CAF50;
+            color: white;
+            padding: 13px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Extra style for the cancel button (red) */
+        .sign-up {
+                padding-top: 23px;
+                text-align: center;
+                font-family: "OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+                font-weight: normal;
+                font-size: 14px;
+}
+        }
+
+
+
+
+        /* The "Forgot password" text */
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+
+
+
+
+
+    	</style>
+
+    	<script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+    </script>
 	</body>
-
-
-
-
-	<style>
-
-	html {
-    width: 350px;
-    margin: auto;
-	margin-top: 350px;
-	}
-
-	body {
-	background-color: #0066cc;
-	}
-
-	h1 {color: white;
-	}
-
-
-
-
-	</style>
-
 </html>
-=======
-Please login
->>>>>>> 63577d055c001610831fda57b583059dd54fb8bf
