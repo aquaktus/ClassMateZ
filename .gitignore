@@ -36,6 +36,7 @@
 ehthumbs.db
 Thumbs.db
 
-# pythonAnywhere wsgi file #
+# pythonAnywhere stuff#
 #####################
 ClassMateZ/wsgi.py
+*.pyc
