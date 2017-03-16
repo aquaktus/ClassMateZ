@@ -1,1 +1,34 @@
 this is a file so that git notices the notes folder but in here we can add all the notes we have on our progress and issues
+
+
+A guide to serup your git repo from scratch
+
+>first go to the main master repo at https://github.com/aquaktus/ClassMateZ
+>then fork the repository to your git account (button at the top right)
+>then downdoad the repo into your pythonAnywhere server
+
+>then go to the base directory of the repo
+>run these commands:
+
+git remote add upstream https://github.com/aquaktus/ClassMateZ.git
+git fetch upstream
+
+>this sets the main repo (the one on my account) to be a remote one called upstream
+>yow are now connected
+
+>this command is essential!!!!!!!!!!!
+git pull upstream master
+
+>this is to pull all the newest changes from the main master branch
+
+================================
+
+>to add changes you have made to your branch/fork to the main master
+>push all changes to your master repo (as you would normaly)
+>then use the GUI on the git hub website to make a pull request to the master branch on aquaktus's account
+>submit it
+>and if you have the correct permissions
+>you can merge them yourself
+>if not, send me a message to merge them for you
+
+>that's it! have fun!
