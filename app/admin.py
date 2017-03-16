@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ClassMateZ.models import UserProfile
+from app.models import UserProfile
 
 # Register your models here.
 
