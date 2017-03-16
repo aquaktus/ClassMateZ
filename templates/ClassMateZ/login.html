@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 
+    <title>
+        {% block title_block %}
+        Login
+        {% endblock %}
+    </title>
 
 
 	<body>
+    {% block body_block %}
 
 		    <img class="classmatez" src="/media/ClassmateZ.png">
 
@@ -20,23 +27,32 @@
 			</dir>
 
 			<dir class="b-box">
-			    <form action="/action_page.php">
 
-                      <div class="container">
-                            <label><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="uname" required>
 
-                            <label><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required>
+                    <form id="login_form" method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
 
-                            <div id="remember" class="remember">
+                        <label><b>Username</b></label>
+                        <input type="text" name="username" value="" size="50" />
+
+                        <br />
+
+                        <label><b>Password</b></label>
+                        <input type="password" name="password" value="" size="50" />
+
+                        <br />
+
+                        <div id="remember" class="remember">
                                         <label for="cb_cookieuser_navbar"><input type="checkbox" name="cookieuser" value="1" id="cb_cookieuser_navbar" class="cb_cookieuser_navbar" accesskey="c" tabindex="103" />stay logged in</label>
                                     </div>
                             <span class="psw">Forgot <a href="#">password?</a></span>
-                            <button type="submit">Login</button>
 
+                        <br />
+                        <input type="submit" value="submit" />
 
-                      </div>
+                    </form>
+
+            </div>
 
                       <div class="sign-up">
                             No account? <a href="/register">Create one!</a>
@@ -115,7 +131,8 @@
         }
 
         /* Set a style for all buttons */
-        button{
+        input[type=submit] {
+
             background-color: #4CAF50;
             color: white;
             padding: 13px 20px;
@@ -166,5 +183,6 @@
                 }
             }
     </script>
+    {% endblock %}
 	</body>
 </html>
