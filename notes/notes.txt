@@ -16,10 +16,14 @@ git fetch upstream
 >this sets the main repo (the one on my account) to be a remote one called upstream
 >yow are now connected
 
->this command is essential!!!!!!!!!!!
+>you have to then copy the wsgi.py file that is in the notes folder to the app folder ClassMateZ/ClassMateZ/
+>and change line 21 to the name of your user on pythonAnywhere
+>you have to do this step!!! if not it won't work!!!
+
+>this command below is essential!!!!!!!!!!!
 git pull upstream master
 
->this is to pull all the newest changes from the main master branch
+>this is to pull all the newest changes from the main master branch, do it every time you start working on the app since you have to be up to date with the master branch to push and not have merge conflicts with others
 
 ================================
 
