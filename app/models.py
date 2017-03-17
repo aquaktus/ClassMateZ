@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
-from django.template.defaultfilters import slugify
+#from django.template.defaultfilters import slugify
 from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-
 
 class Class(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
@@ -21,6 +20,7 @@ class UserProfile(models.Model):
 	id = models.AutoField(primary_key=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	classes = models.ManyToManyField(Class)
+
 	def __str__(self):
 		return self.user.username
 
@@ -60,20 +60,9 @@ class Zone(models.Model):
     layout = models.OneToOneField(Layout, primary_key = True, on_delete=models.CASCADE)
     users = models.ManyToManyField(UserProfile)
     zone_name = models.CharField(max_length=2, choices=ZONE_NAMES)
+
     def __str__(self):
 		return "Zone name: " + self.zone_name + ", " + self.layout
 
 	#def __unicode__(self):
 		#return (self.class_id + ", " + self.layout)
-
-class UserProfile(models.Model):
-	# This line is required. Links UserProfile to a User model instance.
-	user = models.OneToOneField(User)
-	# The additional attributes we wish to include.
-	website = models.URLField(blank=True)
-	#zones = models.ManyToManyField(Zone)
-	picture = models.ImageField(upload_to='profile_images', blank=True)
-	# Override the __unicode__() method to return out something meaningful!
-	# Remember if you use Python 2.7.x, define __unicode__ too!
-	def __str__(self):
-		return self.user.username
