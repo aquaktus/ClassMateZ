@@ -34,7 +34,7 @@
 			<dir class="b-box">
 
 
-                    <form id="login_form" method="post" action="{% url 'login' %}">
+                    <form id="login_form" method="post" action="{% url 'app:login' %}">
                         {% csrf_token %}
 
                         <label><b>Username</b></label>
@@ -60,7 +60,7 @@
             </div>
 
                       <div class="sign-up">
-                            No account? <a href="/register">Create one!</a>
+                            No account? <a href="/app/register">Create one!</a>
 
                       </div>
                 </form>

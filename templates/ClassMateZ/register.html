@@ -21,10 +21,10 @@
 			</dir>
 
 			<dir class="b-box">
-			    <form action="/action_page.php">
+			    <form action="{% url "app:register" %}">
 
                       <div class="container">
-                                    <form id="user_form" method="post" action="{% url "register" %}" enctype="multipart/form-data">
+                                    <form id="user_form" method="post" action="{% url "app:register" %}" enctype="multipart/form-data">
 
                                             {% csrf_token %}
 
