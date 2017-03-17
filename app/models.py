@@ -65,4 +65,8 @@ class Zone(models.Model):
 		return "Zone name: " + self.zone_name + ", " + self.layout
 
 	#def __unicode__(self):
+<<<<<<< HEAD:app/models.py
 		#return (self.class_id + ", " + self.layout)
+=======
+		#return (self.class_id + ", " + self.layout)
+>>>>>>> master:ClassMateZ/models.py
