@@ -1,5 +1,14 @@
-Welcome to classmateZ
-<ul>
-<li><a href="/login">Log in </a></li>
-<li><a href="/register">Sign Up </a></li>
-</<ul>
+{% extends 'ClassMateZ/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Index
+{% endblock %}
+
+{% block body_block %}
+    <h1>Welcome to classmateZ</h1>
+    <ul>
+    <li><a href="/app/login" type="button" class="btn btn-primary">Log in </a></li>
+    <li><a href="/app/register" type="button" class="btn btn-primary">Sign Up </a></li>
+    </<ul>
+{% endblock %}
