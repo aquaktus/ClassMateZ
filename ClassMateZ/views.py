@@ -119,11 +119,6 @@ def user_login(request):
 		# blank dictionary object...
 		return render(request, 'ClassMateZ/login.html', {})
 
-def some_view(request):
-    if not request.user.is_authenticated():
-        return HttpResponse("You are logged in.")
-    else:
-        return HttpResponse("You are not logged in.")
 
 @login_required
 def restricted(request):
