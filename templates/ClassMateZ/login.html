@@ -8,6 +8,11 @@
         {% endblock %}
     </title>
 
+    <head>
+
+                <!-- CSS -->
+				<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+    </head>
 
 	<body>
     {% block body_block %}
@@ -60,21 +65,12 @@
                       </div>
                 </form>
 			</dir>
-
-
-
-
-
-
-    	<style>
-
-
-
-                        HTML {	background-image: url("/media/background.png");
-                                background-repeat: no-repeat;
-                                background-position: center;
-                                background-attachment: fixed;
-}
+    <style>
+        HTML {	background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
 
 
@@ -123,12 +119,10 @@
             border: 1px solid black #ccc;
             box-sizing: border-box;
 
-
-
-
-
-
         }
+
+
+
 
         /* Set a style for all buttons */
         input[type=submit] {
@@ -143,6 +137,7 @@
             box-sizing: border-box;
         }
 
+
         /* Extra style for the cancel button (red) */
         .sign-up {
                 padding-top: 14px;
@@ -150,8 +145,8 @@
                 font-family: "OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
                 font-weight: normal;
                 font-size: 14px;
-}
         }
+
 
 
 
@@ -167,22 +162,13 @@
     a {
         color:green;
     }
+    </style>
 
 
 
-    	</style>
 
-    	<script>
-            // Get the modal
-            var modal = document.getElementById('id01');
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-    </script>
+
     {% endblock %}
 	</body>
 </html>

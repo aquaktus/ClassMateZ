@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 
 
 
 	<body>
-
+    {% block body_block %}
 		    <img class="classmatez" src="/media/ClassmateZ.png">
 
 
@@ -23,21 +24,19 @@
 			    <form action="/action_page.php">
 
                       <div class="container">
-                            <label><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="uname" required>
+                                    <form id="user_form" method="post" action="{% url "register" %}" enctype="multipart/form-data">
 
-                            <label><b>Email</b></label>
-                            <input type="email" placeholder="Enter Email" name="uname" required>
+                                            {% csrf_token %}
 
-                            <label><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required>
-
-                            <label><b>Password Confirmation</b></label>
-                            <input type="password" placeholder="Enter Password Confirmation" name="psw" required>
+                                            <!-- Display each form. The as_p method wraps each element in a paragraph
+                                                 (<p>) element. This ensures each element appears on a new line,
+                                                 making everything look neater. -->
+                                            {{ user_form.as_p }}
 
 
-
-                            <button type="submit">Sign Up</button>
+                                            <!-- Provide a button to click to submit the form. -->
+                                            <input type="submit" name="submit" value="Register" />
+                                    </form>
                       </div>
 
                      <div style="background-image: url(http://your-image.jpg);">
@@ -104,8 +103,9 @@
 
         }
 
-        /* Set a style for all buttons */
-        button{
+         /* Set a style for all buttons */
+        input[type=submit] {
+
             background-color: #4CAF50;
             color: white;
             padding: 13px 20px;
@@ -154,5 +154,7 @@
 
         }
     </script>
+
+    {% endblock %}
 	</body>
 </html>
