@@ -26,22 +26,25 @@
                             <label><b>Username</b></label>
                             <input type="text" placeholder="Enter Username" name="uname" required>
 
+                            <label><b>Email</b></label>
+                            <input type="email" placeholder="Enter Email" name="uname" required>
+
                             <label><b>Password</b></label>
                             <input type="password" placeholder="Enter Password" name="psw" required>
 
-                            <div id="remember" class="remember">
-                                        <label for="cb_cookieuser_navbar"><input type="checkbox" name="cookieuser" value="1" id="cb_cookieuser_navbar" class="cb_cookieuser_navbar" accesskey="c" tabindex="103" />stay logged in</label>
-                                    </div>
-                            <span class="psw">Forgot <a href="#">password?</a></span>
-                            <button type="submit">Login</button>
+                            <label><b>Password Confirmation</b></label>
+                            <input type="password" placeholder="Enter Password Confirmation" name="psw" required>
 
 
+
+                            <button type="submit">Sign Up</button>
                       </div>
 
-                      <div class="sign-up">
-                            No account? <a href="/register">Create one!</a>
+                     <div style="background-image: url(http://your-image.jpg);">
+                         <img src="http://your-image.jpg" style="visibility: hidden;" />
+                    </div>
 
-                      </div>
+
                 </form>
 			</dir>
 
@@ -52,17 +55,10 @@
 
     	<style>
 
-
-
-                        HTML {	background-image: url("/media/background.png");
+        HTML { background-image: url("/media/background.png");
                                 background-repeat: no-repeat;
                                 background-position: center;
-                                background-attachment: fixed;
-}
-
-
-
-
+                                background-attachment: fixed;}
 
 
     	body {
@@ -71,8 +67,7 @@
             margin-right: auto;
             color: white;
             margin-top:300px;
-            background-image: url("gradient_bg.png");
-
+            background #ffffff url("img_tree.png") no-repeat right top
     	}
 
     	.classmatez {
@@ -83,7 +78,7 @@
 
     	.a-box {
     	    width: 45%;
-    	    height: 250px;
+    	    height: 300px;
     	    float:left;
     	    border-right:1px solid white;
     	}
@@ -99,18 +94,13 @@
 
 
         /* Full-width inputs */
-        input[type=text], input[type=password] {
-            border-radius: 15px;
+        input[type=text], input[type=password] , input[type=email] {
             width: 100%;
+            border-radius: 15px;
             padding: 14px 20px;
             display: inline-block;
             border: 1px solid black #ccc;
             box-sizing: border-box;
-
-
-
-
-
 
         }
 
@@ -127,13 +117,10 @@
         }
 
         /* Extra style for the cancel button (red) */
-        .sign-up {
-                padding-top: 14px;
-                text-align: center;
-                font-family: "OpenSans-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-                font-weight: normal;
-                font-size: 14px;
-}
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
         }
 
 
@@ -142,14 +129,11 @@
         /* The "Forgot password" text */
         span.psw {
             float: right;
-
+            padding-top: 16px;
         }
 
 
 
-    a {
-        color:green;
-    }
 
 
 
@@ -165,6 +149,10 @@
                     modal.style.display = "none";
                 }
             }
+
+            div {
+
+        }
     </script>
 	</body>
 </html>
