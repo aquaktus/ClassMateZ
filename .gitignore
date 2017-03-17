@@ -24,7 +24,7 @@
 ######################
 *.log
 *.sql
-*.sqlite
+*.sqlite3
 
 # OS generated files #
 ######################
@@ -40,3 +40,4 @@ Thumbs.db
 #####################
 ClassMateZ/wsgi.py
 *.pyc
+app/migrations/
