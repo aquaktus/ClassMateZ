@@ -40,4 +40,4 @@ Thumbs.db
 #####################
 ClassMateZ/wsgi.py
 *.pyc
-app/migrations/
+migrations/
