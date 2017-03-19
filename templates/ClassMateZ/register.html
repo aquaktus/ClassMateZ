@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html>
+    <head>
+    <!--
+    <meta charset="utf-8">
 
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
+    </head>
 
 	<body>
-    {% block body_block %}
 		    <img class="classmatez" src="/media/ClassmateZ.png">
 
 
@@ -21,10 +28,13 @@
 			</dir>
 
 			<dir class="b-box">
-			    <form action="{% url "app:register" %}">
+			    {% if registered %}
+                    <strong>thank you for registering!</strong>
+                    <a type="button" class="btn btn-primary" href="{% url 'app:index' %}">Return to the homepage.</a><br />
+                {% else %}
 
                       <div class="container">
-                                    <form id="user_form" method="post" action="{% url "app:register" %}" enctype="multipart/form-data">
+                                    <form id="user_form" method="post" action="{% url 'app:register' %}" enctype="multipart/form-data">
 
                                             {% csrf_token %}
 
@@ -37,14 +47,12 @@
                                             <!-- Provide a button to click to submit the form. -->
                                             <input type="submit" name="submit" value="Register" />
                                     </form>
+                            {% endif %}
                       </div>
 
                      <div style="background-image: url(http://your-image.jpg);">
                          <img src="http://your-image.jpg" style="visibility: hidden;" />
                     </div>
-
-
-                </form>
 			</dir>
 
 
@@ -154,7 +162,5 @@
 
         }
     </script>
-
-    {% endblock %}
 	</body>
 </html>
