@@ -1,1 +1,31 @@
-About classmateZ
+
+<!DOCTYPE html>
+{% extends 'ClassMateZ/base.html' %}
+{% load staticfiles %}
+
+<html class="test">
+    <head>
+        <title>
+            {% block title_block %}
+                About
+            {% endblock %}
+        </title>
+
+    <body>
+{% block body_block %}
+    <h1>About classmateZ</h1>
+{% endblock %}
+    </body>
+
+
+    <style>
+        .test {
+            background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+           }
+    </style>
+
+
+</html>

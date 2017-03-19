@@ -1,10 +1,16 @@
+<!DOCTYPE html>
 {% extends 'ClassMateZ/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    Index
-{% endblock %}
+<html class="test">
+    <head>
+        <title>
+            {% block title_block %}
+                Index
+            {% endblock %}
+        </title>
 
+    <body>
 {% block body_block %}
     <h1>Welcome to classmateZ</h1>
     <ul>
@@ -12,3 +18,17 @@
     <li><a href="/app/register" type="button" class="btn btn-primary">Sign Up </a></li>
     </<ul>
 {% endblock %}
+    </body>
+
+
+    <style>
+        .test {
+            background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+           }
+    </style>
+
+
+</html>
