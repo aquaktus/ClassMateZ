@@ -162,3 +162,13 @@ def about (request):
 	print(request.method)
 	print(request.user)
 	return render(request, 'ClassMateZ/about.html', {})
+
+def My_Account (request):
+	print(request.method)
+	print(request.user)
+	return render(request, 'ClassMateZ/My_Account.html', {})
+
+def SquadZ (request):
+	print(request.method)
+	print(request.user)
+	return render(request, 'ClassMateZ/SquadZ.html', {})

@@ -15,22 +15,22 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container" >
 
         <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
+  <div class="container-fluid" >
+    <div class="navbar-header" >
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">ClassMateZ</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/#">Home</a></li>
-        
+
         <!--
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
@@ -40,14 +40,14 @@
             <li><a href="#">Page 1-3</a></li>
           </ul>
           -->
-          
+
         </li>
         <li><a href="/app/about">About</a></li>
-        <li><a href="#">My Account</a></li>
-        <li><a href="#">SquadZ</a></li>
+        <li><a href="/app/My_Account">My Account</a></li>
+        <li><a href="/app/SquadZ">SquadZ</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+
       <ul class="nav navbar-nav navbar-right">
         <li><p class="navbar-text">Already have an account?</p></li>
         <li class="dropdown">
@@ -56,7 +56,7 @@
 				<li>
 					 <div class="row">
 							<div class="col-md-12">
-							
+
 								 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
@@ -92,11 +92,126 @@
             </div>
         </div>
     </body>
-    
+
+
+    <!--https://work.smarchal.com/twbscolor/-->
     <style type="text/css">
+        html {
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+            padding-top:7px;
+            background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            }
+
+        body {
+            background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+
+        }
+
         .dropdown-menu {
             width: 300px;
             padding:10px;
+            color:white;
         }
+
+
+        .navbar {
+          background-color: #004680;
+          border-color: #001c33;
+        }
+        .navbar .navbar-brand {
+          color: #ecf0f1;
+        }
+        .navbar .navbar-brand:hover,
+        .navbar .navbar-brand:focus {
+          color: #608cb0;
+        }
+        .navbar .navbar-text {
+          color: #ecf0f1;
+        }
+        .navbar .navbar-nav > li > a {
+          color: #ecf0f1;
+        }
+        .navbar .navbar-nav > li > a:hover,
+        .navbar .navbar-nav > li > a:focus {
+          color: #608cb0;
+        }
+        .navbar .navbar-nav > li > .dropdown-menu {
+          background-color: #004680;
+        }
+        .navbar .navbar-nav > li > .dropdown-menu > li > a {
+          color: #ecf0f1;
+        }
+        .navbar .navbar-nav > li > .dropdown-menu > li > a:hover,
+        .navbar .navbar-nav > li > .dropdown-menu > li > a:focus {
+          color: #608cb0;
+          background-color: #001c33;
+        }
+        .navbar .navbar-nav > li > .dropdown-menu > li > .divider {
+          background-color: #001c33;
+        }
+        .navbar .navbar-nav .open .dropdown-menu > .active > a,
+        .navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
+        .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+          color: #608cb0;
+          background-color: #001c33;
+        }
+        .navbar .navbar-nav > .active > a,
+        .navbar .navbar-nav > .active > a:hover,
+        .navbar .navbar-nav > .active > a:focus {
+          color: #608cb0;
+          background-color: #001c33;
+        }
+        .navbar .navbar-nav > .open > a,
+        .navbar .navbar-nav > .open > a:hover,
+        .navbar .navbar-nav > .open > a:focus {
+          color: #608cb0;
+          background-color: #001c33;
+        }
+        .navbar .navbar-toggle {
+          border-color: #001c33;
+        }
+        .navbar .navbar-toggle:hover,
+        .navbar .navbar-toggle:focus {
+          background-color: #001c33;
+        }
+        .navbar .navbar-toggle .icon-bar {
+          background-color: #ecf0f1;
+        }
+        .navbar .navbar-collapse,
+        .navbar .navbar-form {
+          border-color: #ecf0f1;
+        }
+        .navbar .navbar-link {
+          color: #ecf0f1;
+        }
+        .navbar .navbar-link:hover {
+          color: #608cb0;
+        }
+        
+        @media (max-width: 767px) {
+          .navbar .navbar-nav .open .dropdown-menu > li > a {
+            color: #ecf0f1;
+            margin:auto
+          }
+          .navbar .navbar-nav .open .dropdown-menu > li > a:hover,
+          .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #608cb0;
+          }
+          .navbar .navbar-nav .open .dropdown-menu > .active > a,
+          .navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
+          .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+            color: #608cb0;
+            background-color: #001c33;
+          }
+        }
+
+
     </style>
 </html>
