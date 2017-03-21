@@ -13,6 +13,8 @@ def index(request):
 	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
 	context_dict = {}
 
+
+
 	# Obtain our Response object early so we can add cookie information.
 	#visitor_cookie_handler(request)
 
@@ -163,10 +165,13 @@ def about (request):
 	print(request.user)
 	return render(request, 'ClassMateZ/about.html', {})
 
-def My_Account (request):
-	print(request.method)
-	print(request.user)
-	return render(request, 'ClassMateZ/My_Account.html', {})
+def profile (request):
+
+    user = request.user
+
+    if user.is_authenticated():
+        print ("hello")
+    return render(request, 'ClassMateZ/profile.html', {})
 
 def SquadZ (request):
 	print(request.method)
