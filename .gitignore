@@ -41,3 +41,4 @@ Thumbs.db
 ClassMateZ/wsgi.py
 *.pyc
 migrations/
+db.sqlite3
