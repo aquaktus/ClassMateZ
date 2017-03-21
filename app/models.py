@@ -2,12 +2,28 @@ from __future__ import unicode_literals
 #from django.template.defaultfilters import slugify
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 
 class Class(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
-    date = models.DateField()
+    DAY = (
+        ('mon', 'Monday'),
+        ('tue', 'Tuesday'),
+        ('wed', 'Wednesday'),
+        ('thu', 'Thursday'),
+        ('fri', 'Friday'),
+        ('sat', 'Saturday'),
+        ('sun', 'Sunday'),
+    )
+    day = models.CharField(
+        max_length=3,
+        choices=DAY,
+        default='mon',
+        blank=False,
+    )
+    time = models.TimeField(default=datetime.strptime('00', '%H'), blank=False)
     def __str__(self):
 		return self.name
 	#def __unicode__(self):
