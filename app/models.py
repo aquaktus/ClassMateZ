@@ -30,10 +30,9 @@ class Class(models.Model):
 		#return self.name
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User, primary_key=True)
 	name = models.CharField(max_length=100)
 	website = models.URLField(blank=True)
-	id = models.AutoField(primary_key=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	classes = models.ManyToManyField(Class)
 
