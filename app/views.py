@@ -1,29 +1,34 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 
+from app.models import UserProfile
+
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from datetime import datetime
+from datetime import datetime, date
 
 def index(request):
 	# Construct a dictionary to pass to the template engine as its context.
 	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
-	context_dict = {}
+
+    request.user
+    day = date.today().strftime("%A")
 
 
+    if request.user.is_authenticated():
+        print ("Authenticition complete")
+       # if UserProfile.objects.all().get(user = request.user).exists():
+       #     profile = UserProfile.objects.all().get(user = request.user)
 
-	# Obtain our Response object early so we can add cookie information.
-	#visitor_cookie_handler(request)
 
-	#context_dict['visits'] = request.session['visits']
-
-	response = render(request, 'ClassMateZ/index.html', context_dict)
+    context_dict = {'day':day}
+    response = render(request, 'ClassMateZ/index.html', context_dict)
 	# Call function to handle the cookies
 	# Return response back to the user, updating any cookies that need changed.
-	return response
+    return response
 
 
 
@@ -34,12 +39,14 @@ def register(request):
 	# True when registration succeeds.
 	registered = False
 	# If it's a HTTP POST, we're interested in processing form data.
+	print ("registration request received")
 	if request.method == 'POST':
 		# Attempt to grab information from the raw form information.
 		# Note that we make use of both UserForm and UserProfileForm.
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
 		# If the two forms are valid...
+		print (user_form)
 		if user_form.is_valid() and profile_form.is_valid():
 			# Save the user's form data to the database.
 			user = user_form.save()
@@ -168,6 +175,7 @@ def about (request):
 def profile (request):
 
     user = request.user
+    updated = False
 
     if user.is_authenticated():
         print ("Authenticition complete")
@@ -179,13 +187,14 @@ def profile (request):
 			if 'picture' in request.FILES:
 				profile.picture = request.FILES['picture']
 			profile.save()
+			updated = True
 		else:
 			# Invalid form or forms - mistakes or something else?
 			# Print problems to the terminal.
 			print(profile_form.errors)
 	else:
 		profile_form = UserProfileForm()
-    return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form})
+    return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form, 'updated': updated})
 
 def SquadZ (request):
 	print(request.method)
