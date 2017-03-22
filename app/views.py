@@ -170,8 +170,22 @@ def profile (request):
     user = request.user
 
     if user.is_authenticated():
-        print ("hello")
-    return render(request, 'ClassMateZ/profile.html', {})
+        print ("Authenticition complete")
+	if request.method == 'POST':
+		profile_form = UserProfileForm(data=request.POST)
+		if profile_form.is_valid():
+			profile = profile_form.save(commit=False)
+			profile.user = user
+			if 'picture' in request.FILES:
+				profile.picture = request.FILES['picture']
+			profile.save()
+		else:
+			# Invalid form or forms - mistakes or something else?
+			# Print problems to the terminal.
+			print(profile_form.errors)
+	else:
+		profile_form = UserProfileForm()
+    return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form})
 
 def SquadZ (request):
 	print(request.method)
