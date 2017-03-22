@@ -6,9 +6,18 @@ from datetime import datetime
 
 # Create your models here.
 
+class Layout(models.Model):
+    layoutName = models.CharField(max_length=100, default='New Layout', blank=False)
+    nbrOfZones = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='layout_images')
+    def __str__(self):
+		return self.layoutName
+
+
 class Place(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
     address = models.CharField(max_length=100);
+    layout = models.ForeignKey(Layout, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
     def __unicode__(self):
@@ -16,7 +25,7 @@ class Place(models.Model):
 
 
 class Class(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=100)
     DAY = (
         ('mon', 'Monday'),
         ('tue', 'Tuesday'),
@@ -36,7 +45,7 @@ class Class(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
 
     def __str__(self):
-		return self.name
+		return self.name + " " + str(self.time) + " " + self.day
 	#def __unicode__(self):
 		#return self.name
 
@@ -53,32 +62,13 @@ class UserProfile(models.Model):
 	def __unicode__(self):
 		return self.name
 
-class Layout(models.Model):
-    layout_id = models.AutoField(primary_key=True)
-    class_id = models.OneToOneField(Class, on_delete=models.CASCADE)
-    place_name = models.OneToOneField(Place, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='layout_images')
-    def __str__(self):
-		return self.place_name + ", " + self.class_id
-
-	#def __unicode__(self):
-		#return (self.place_name + ", " + self.class_id)
-
-
 class Zone(models.Model):
 
-    ZONE_NAMES = (
-        ('A', 'Zone A'),
-        ('B', 'Zone B'),
-        ('C', 'Zone C'),
-        ('D', 'Zone D'),
-    )
-    layout = models.OneToOneField(Layout, primary_key = True, on_delete=models.CASCADE)
-    users = models.ManyToManyField(UserProfile)
-    zone_name = models.CharField(max_length=2, choices=ZONE_NAMES)
-
+    users = models.ManyToManyField(UserProfile, blank=True)
+    zoneNumber = models.IntegerField(default=0)
+    zClass = models.ForeignKey(Class, on_delete=models.CASCADE)
     def __str__(self):
-		return "Zone name: " + self.zone_name + ", " + self.layout
+		return "Zone: " + str(self.zoneNumber) + " " + str(self.zClass)
 
 	#def __unicode__(self):
 		#return (self.class_id + ", " + self.layout)

@@ -43,3 +43,6 @@ ClassMateZ/wsgi.py
 migrations/
 db.sqlite3
 media/profile_images/
+*.png
+*.jpg
+*.jpeg
