@@ -54,8 +54,15 @@ class Class(models.Model):
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 	name = models.CharField(max_length=100, default='new user', blank=True)
-	picture = models.ImageField(upload_to='profile_images', blank=True)
+	picture = models.ImageField(upload_to='profile_images', default='./profile_images/default-user.png', blank=True)
 	classes = models.ManyToManyField(Class, blank=True)
+
+	def url_fix(self):
+	    url = self.picture.url
+	    if url.startswith("/media/media/"):
+	        return self.picture.url[6:]
+	    else:
+	        return self.picture.url
 
 	def __str__(self):
 		return self.name
