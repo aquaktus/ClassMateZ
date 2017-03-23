@@ -207,10 +207,10 @@ def profile(request):
             if 'file' in request.FILES:
                 print(1000000000000)
                 #user_profile.picture = request.FILES['picture']
-            picture = str(request.FILES.get('picture'))
-            print(str(request.FILES.get('picture',False)), 1000000)
-            handle_uploaded_file(picture, request.FILES['picture'])
-            if picture:
+            if 'picture' in request.FILES:
+                picture = str(request.FILES.get('picture'))
+                print(str(request.FILES.get('picture',False)), 1000000)
+                handle_uploaded_file(picture, request.FILES['picture'])
                 user_profile.picture = "/profile_images/" + picture
             user_profile.save()
             updated = True
