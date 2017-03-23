@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import QueryDict
 from datetime import datetime, date
+import os
 
 def index(request):
 	# Construct a dictionary to pass to the template engine as its context.
@@ -202,8 +203,15 @@ def profile(request):
             profile = profile_form.save(commit=False)
             user_profile.name = profile.name
             #user_profile.classes = profile.classes
-            if 'picture' in request.FILES:
-                user_profile.picture = request.FILES['picture']
+            print(request.FILES)
+            if 'file' in request.FILES:
+                print(1000000000000)
+                #user_profile.picture = request.FILES['picture']
+            picture = str(request.FILES.get('picture'))
+            print(str(request.FILES.get('picture',False)), 1000000)
+            handle_uploaded_file(picture, request.FILES['picture'])
+            if picture:
+                user_profile.picture = "/profile_images/" + picture
             user_profile.save()
             updated = True
         else:
@@ -213,9 +221,14 @@ def profile(request):
         user.email = data.__getitem__("email")
         user.save()
     else:
-        print(user_profile.picture.url)
         profile_form = UserProfileForm(data=data_json)
     return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form, 'updated': updated, 'user_profile': user_profile})
+
+def handle_uploaded_file(url, f):
+
+    with open('/home/aquaktus/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 def SquadZ (request):
 	print(request.method)
