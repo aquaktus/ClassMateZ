@@ -31,7 +31,7 @@
                         <div class="container">
 
                               	<hr>
-                              	<form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:profile' %}">
+                              	<form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:profile' %}" enctype="multipart/form-data">
                             	<div class="row">
                                   <!-- left column -->
                                   <div class="col-md-3">
@@ -39,7 +39,7 @@
                                       <img src= {{user_profile.url_fix}} class="avatar img-circle" alt="avatar" width = 200 height = 200> <!-- "//placehold.it/100" -->
                                       <h6>Upload a different photo...</h6>
 
-                                      <input type="file" name="picture" class="form-control">
+                                      <input id="file" type="file" name="picture" class="form-control">
                                     </div>
                                   </div>
 
