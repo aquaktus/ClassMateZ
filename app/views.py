@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 
 from app.models import UserProfile
+from app.models import Class
+from app.models import Place
+from app.models import Layout
 
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
@@ -14,22 +17,40 @@ def index(request):
 	# Construct a dictionary to pass to the template engine as its context.
 	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
 
-    request.user
     day = date.today().strftime("%A")
 
+    context_dict = {'day':day}
 
     if request.user.is_authenticated():
         print ("Authenticition complete")
-       # if UserProfile.objects.all().get(user = request.user).exists():
-       #     profile = UserProfile.objects.all().get(user = request.user)
+        userClasses = UserProfile.objects.get(user=request.user)
+        context_dict['userClasses'] = userClasses
+        print (userClasses)
 
 
-    context_dict = {'day':day}
     response = render(request, 'ClassMateZ/index.html', context_dict)
 	# Call function to handle the cookies
 	# Return response back to the user, updating any cookies that need changed.
     return response
 
+
+def showClass(request, classId):
+	# Construct a dictionary to pass to the template engine as its context.
+	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
+
+    day = date.today().strftime("%A")
+
+    context_dict = {'day':day}
+
+    classToShow = Class.objects.get(classId=classId)
+    context_dict['classToShow'] = classToShow
+
+    #place =
+
+    response = render(request, 'ClassMateZ/showClass.html', context_dict)
+	# Call function to handle the cookies
+	# Return response back to the user, updating any cookies that need changed.
+    return response
 
 
 def register(request):
@@ -41,6 +62,7 @@ def register(request):
 	# If it's a HTTP POST, we're interested in processing form data.
 	print ("registration request received")
 	if request.method == 'POST':
+
 		# Attempt to grab information from the raw form information.
 		# Note that we make use of both UserForm and UserProfileForm.
 		user_form = UserForm(data=request.POST)

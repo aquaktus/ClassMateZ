@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'about/$', views.about, name='about'),
     url(r'profile/$', views.profile, name='profile'),
     url(r'SquadZ/$', views.SquadZ, name='SquadZ'),
+    url(r'^class/(?P<classId>[\w\-]+)/$', views.showClass, name='showClass'),
 ]
