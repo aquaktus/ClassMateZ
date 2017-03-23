@@ -31,6 +31,7 @@
                         <div class="container">
 
                               	<hr>
+                              	<form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:profile' %}">
                             	<div class="row">
                                   <!-- left column -->
                                   <div class="col-md-3">
@@ -49,14 +50,14 @@
                                       <i class="fa fa-coffee"></i>
                                        make sure to click <strong>Save Changes</strong>. to Update you profile.
                                     </div>
-                                    <h3>Personal info</h3>
+                                    <h3>Personal information</h3>
 
-                                    <form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:profile' %}">
+
                                         {% csrf_token %}
                                       <div class="form-group">
                                         <label class="col-lg-3 control-label">Name:</label>
                                         <div class="col-lg-8">
-                                          <input class="form-control" name="name" type="text" value="{{ user.name }}">
+                                          <input class="form-control" name="name" type="text" value="{{ userprofile.user.name }}">
                                         </div>
                                       </div>
 
