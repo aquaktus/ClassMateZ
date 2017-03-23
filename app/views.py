@@ -190,19 +190,18 @@ def profile(request):
     data_json = QueryDict('', mutable=True)
     data_json.update(dict)
     updated = False
-    print(user_profile.picture.url, 1)
 
     if user.is_authenticated():
         print("Authenticition complete")
     if request.method == 'POST':
         data = request.POST
+        print(data)
         profile_form = UserProfileForm(data=data)
         if profile_form.is_valid():
+            print(data)
             profile = profile_form.save(commit=False)
-            print(profile, 4)
-            user_profile.name = data.name
-            user_profile.website = data.website
-            user_profile.classes = data.classes
+            user_profile.name = profile.name
+            #user_profile.classes = profile.classes
             if 'picture' in request.FILES:
                 user_profile.picture = request.FILES['picture']
             user_profile.save()
@@ -210,9 +209,11 @@ def profile(request):
         else:
             # Invalid form or forms - mistakes or something else?
             # Print problems to the terminal.
-            print(profile_form.errors)
+            print(user_profile.errors)
+        user.email = data.__getitem__("email")
+        user.save()
     else:
-        print(data_json)
+        print(user_profile.picture.url)
         profile_form = UserProfileForm(data=data_json)
     return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form, 'updated': updated, 'user_profile': user_profile})
 

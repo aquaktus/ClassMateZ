@@ -36,7 +36,7 @@
                                   <!-- left column -->
                                   <div class="col-md-3">
                                     <div class="text-center">
-                                      <img src= {{user_profile.picture.url}} class="avatar img-circle" alt="avatar" width = 200 height = 200> <!-- "//placehold.it/100" -->
+                                      <img src= {{user_profile.url_fix}} class="avatar img-circle" alt="avatar" width = 200 height = 200> <!-- "//placehold.it/100" -->
                                       <h6>Upload a different photo...</h6>
 
                                       <input type="file" name="picture" class="form-control">
@@ -67,7 +67,7 @@
                                           <input class="form-control" name="email" type="text" value="{{ user.email }}">
                                         </div>
                                       </div>
-
+                                    <!--
                                       <div class="form-group">
                                         <label class="col-lg-3 control-label">Classes:</label>
                                         <div class="col-lg-8">
@@ -78,14 +78,7 @@
                                             </select>
                                           </div>
                                         </div>
-                                      </div>
-
-                                      <div class="form-group">
-                                        <label class="col-md-3 control-label">Username:</label>
-                                        <div class="col-md-8">
-                                          <input class="form-control" name="username" type="text" value="{{ user.username }}">
-                                        </div>
-                                      </div>
+                                      </div> -->
 
                                       <div class="form-group">
                                         <label class="col-md-3 control-label">Password:</label>
