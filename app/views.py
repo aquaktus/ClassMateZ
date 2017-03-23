@@ -36,6 +36,27 @@ def index(request):
     return response
 
 
+def index_week(request):
+	# Construct a dictionary to pass to the template engine as its context.
+	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
+
+    day = date.today().strftime("%A")
+
+    context_dict = {'day':day}
+
+    if request.user.is_authenticated():
+        print ("Authenticition complete")
+        userClasses = UserProfile.objects.get(user=request.user)
+        context_dict['userClasses'] = userClasses
+        print (userClasses)
+
+
+    response = render(request, 'ClassMateZ/index_week.html', context_dict)
+	# Call function to handle the cookies
+	# Return response back to the user, updating any cookies that need changed.
+    return response
+
+
 def showClass(request, classId):
 	# Construct a dictionary to pass to the template engine as its context.
 	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
