@@ -52,7 +52,6 @@ class Class(models.Model):
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 	name = models.CharField(max_length=100, default='new user', blank=False)
-	website = models.URLField(blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	classes = models.ManyToManyField(Class, blank=True)
 

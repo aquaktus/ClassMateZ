@@ -1,0 +1,44 @@
+        HTML {
+            background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            width:auto;
+
+        }
+
+        body {
+            background-image: url("/media/background.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            color:white;
+        }
+        /* Full-width inputs */
+        input[type=text], input[type=password], input[type=email] {
+            width: 100%;
+            color: black;
+            border-radius: 15px;
+            padding: 14px 20px;
+            display: inline-block;
+            border: 1px solid black #ccc;
+            box-sizing: border-box;
+
+        }
+
+         /* Set a style for all buttons */
+        input[type=submit] {
+
+            background-color: #4CAF50;
+            color: white;
+            padding: 13px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+
+
