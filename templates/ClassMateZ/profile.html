@@ -36,7 +36,7 @@
                                   <!-- left column -->
                                   <div class="col-md-3">
                                     <div class="text-center">
-                                      <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                                      <img src= {{user_profile.picture.url}} class="avatar img-circle" alt="avatar" width = 200 height = 200> <!-- "//placehold.it/100" -->
                                       <h6>Upload a different photo...</h6>
 
                                       <input type="file" name="picture" class="form-control">
@@ -57,7 +57,7 @@
                                       <div class="form-group">
                                         <label class="col-lg-3 control-label">Name:</label>
                                         <div class="col-lg-8">
-                                          <input class="form-control" name="name" type="text" value="{{ userprofile.user.name }}">
+                                          <input class="form-control" name="name" type="text" value="{{ user_profile.name }}">
                                         </div>
                                       </div>
 
