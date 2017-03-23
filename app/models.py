@@ -44,6 +44,8 @@ class Class(models.Model):
     time = models.TimeField(default=datetime.strptime('00', '%H'), blank=False)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
 
+    classId = models.CharField(max_length=128, unique=True)
+
     def __str__(self):
 		return self.name + " " + str(self.time) + " " + self.day
 	#def __unicode__(self):
@@ -56,7 +58,7 @@ class UserProfile(models.Model):
 	classes = models.ManyToManyField(Class, blank=True)
 
 	def __str__(self):
-		return self.user.username
+		return self.name
 
 	def __unicode__(self):
 		return self.name

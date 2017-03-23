@@ -9,14 +9,54 @@
                 Index
             {% endblock %}
         </title>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                $(".clickable-row").click(function() {
+                    window.location = $(this).data("href");
+                });
+            });
+        </script>
+    </head>
     <body>
 {% block body_block %}
     <div>the day is {{day}}</div>
+    </br>
+
+    {% if user.is_authenticated %}
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Time</th>
+            <th>Place</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for class in userClasses.classes.all %}
+              <tr>
+                <td>{{ class.name }}</td>
+                <td>{{ class.time }}</td>
+                <td>{{ class.place }}</td>
+                <td><a href = "{% url 'app:showClass' class.classId %}">See Class</a></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <h2>Since you aren't signed in, ClassMateZ has limited functionality</h2>
+
+    {% endif %}
+
+
     <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px;">
 
 
     </<ul>
 {% endblock %}
+
     </body>
 </html>

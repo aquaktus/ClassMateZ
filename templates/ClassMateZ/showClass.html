@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'ClassMateZ/base.html' %}
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>
+            {% block title_block %}
+                Class
+            {% endblock %}
+        </title>
+
+    <body>
+    {% block body_block %}
+    <h1>The class is {{ classToShow.name }}</h1>
+    <h1>Place is {{ classToShow.place.layout.image }}</h1>
+    </br>
+
+    <img src="/media/{{ classToShow.place.layout.image }}" style="margin:auto; width:100%; padding:10px;">
+
+
+    </<ul>
+{% endblock %}
+    </body>
+</html>

@@ -7,8 +7,11 @@ from app.models import Zone
 
 # Register your models here.
 
+class ClassAdmin(admin.ModelAdmin):
+	prepopulated_fields = {'classId':('name', str('time'), 'day')}
+
 admin.site.register(UserProfile)
-admin.site.register(Class)
+admin.site.register(Class, ClassAdmin)
 admin.site.register(Place)
 admin.site.register(Layout)
 admin.site.register(Zone)
