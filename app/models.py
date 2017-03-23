@@ -60,7 +60,7 @@ class UserProfile(models.Model):
 	def url_fix(self):
 	    url = self.picture.url
 	    if url.startswith("/media/media/"):
-	        return self.picture.url[6:]
+	        return self.picture.url[22:]
 	    else:
 	        return self.picture.url
 
