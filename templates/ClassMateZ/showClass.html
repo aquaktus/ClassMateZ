@@ -15,11 +15,59 @@
     <h1>The class is {{ classToShow.name }}</h1>
     <h1>Place is {{ classToShow.place.layout.image }}</h1>
     </br>
+    <div id="cont" width="100%" height="auto">
+    <img id="layout" src="/media/{{ classToShow.place.layout.image }}" style="overflow: hidden;" width="960" height="540" alt="Planets" usemap="#planetmap">
 
-    <img src="/media/{{ classToShow.place.layout.image }}" style="margin:auto; width:100%; padding:10px;">
+    <map name="planetmap">
+        {% for zoneNbr in nbrOfZones %}
+            <area class="zoneMap" id="zoneMap{{ zoneNbr }}" style="z-index: -1;" shape="poly" coords="" alt="Sun" href="sun.htm">
+        {% endfor %}
+    </map>
+    </div>
+    <script>
+    var coordsList = "{{zonesList}}".split(";");
+    $(document).ready(function(){
+       var result = $("#cont").width();
+       $("#layout").width(result).height(result*0.5625);
+       for (i in {{nbrOfZones}}){
+            var coords = coordsList[i].split(",");
+            var newCoords = "";
+            for (var j = 0; j < coords.length; j++){
+                newCoords = newCoords + (String(parseInt(Math.round(coords[j]*(result/960)))) + ",")
+            }
+            var newCoords = newCoords.substring(0, newCoords.length-1);
+            $("#zoneMap" + String(i)).attr("coords", newCoords)
+       }
 
+       $(".zoneMap").hover(function(){                                                  //this highlighting function is suppose to work, but there seems to be no way to see the effect, no errors
+            $(this).attr({
+                "border":"2px solid rgba(0,0,255,.3)"
+            });
+            console.log("hover");
+          },function(){
+            $(this).attr({
+                "border":"2px solid rgba(0,0,0,.3)"
+            });
+        });
 
-    </<ul>
-{% endblock %}
+    });
+    $( window ).resize(function() {
+        var result = $("#cont").width();
+       $("#layout").width(result).height(result*0.5625);
+       for (i in {{nbrOfZones}}){
+            var coords = coordsList[i].split(",");
+            var newCoords = "";
+            for (var j = 0; j < coords.length; j++){
+                newCoords = newCoords + (String(parseInt(Math.round(coords[j]*(result/960)))) + ",")
+            }
+            var newCoords = newCoords.substring(0, newCoords.length-1);
+            console.log("#zoneMap" + String(coordsList[i]));
+            $("#zoneMap" + String(i)).attr("coords", newCoords)
+       }
+    });
+
+    </script>
+
+    {% endblock %}
     </body>
 </html>

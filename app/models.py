@@ -8,7 +8,7 @@ from datetime import datetime
 
 class Layout(models.Model):
     layoutName = models.CharField(max_length=100, default='New Layout', blank=False)
-    nbrOfZones = models.IntegerField(default=0)
+    zoneCoords = models.CharField(max_length=1000, default='', blank=False)
     image = models.ImageField(upload_to='layout_images')
     def __str__(self):
 		return self.layoutName
@@ -53,7 +53,7 @@ class Class(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-	name = models.CharField(max_length=100, default='new user', blank=True)
+	name = models.CharField(max_length=100, default='new user', blank=False)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	classes = models.ManyToManyField(Class, blank=True)
 
