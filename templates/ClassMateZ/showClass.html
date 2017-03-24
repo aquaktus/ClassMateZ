@@ -11,15 +11,15 @@
         </title>
 
     <body>
-    {% block body_block %}
-    <h1>The class is {{ classToShow.name }}</h1>
-    <h1>Place is {{ classToShow.place.layout.image }}</h1>
-    </br>
+        {% block body_block %}
+        <h1>The class is {{ classToShow.name }}</h1>
+        <h1>Place is {{ classToShow.place.layout.image }}</h1>
+        </br>
 
-    <img src="/media/{{ classToShow.place.layout.image }}" style="margin:auto; width:100%; padding:10px;">
+        <img src="/media/{{ classToShow.place.layout.image }}" style="margin:auto; width:100%; padding:10px;">
 
 
-    </<ul>
-{% endblock %}
+        </<ul>
+        {% endblock %}
     </body>
 </html>

@@ -247,10 +247,10 @@ def profile(request):
 
 def handle_uploaded_file(url, f):
 
-    if not os.path.exists('/home/aquaktus/ClassMateZ/media/profile_images/'):
-        os.mkdir('/home/aquaktus/ClassMateZ/media/profile_images/')
+    if not os.path.exists('/home/msalim/ClassMateZ/media/profile_images/'):
+        os.mkdir('/home/msalim/ClassMateZ/media/profile_images/')
 
-    with open('/home/aquaktus/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+    with open('/home/msalim/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
