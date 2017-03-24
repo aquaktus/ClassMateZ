@@ -1,14 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-
 from app.models import UserProfile
 from app.models import Class
 from app.models import Place
 from app.models import Layout
 from app.models import Zone
-
 from ClassMateZ.settings import MEDIA_DIR
-from django.template.context import RequestContext
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
