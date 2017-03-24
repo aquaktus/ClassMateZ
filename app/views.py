@@ -5,7 +5,7 @@ from app.models import UserProfile
 from app.models import Class
 from app.models import Place
 from app.models import Layout
-
+from django.template.context import RequestContext
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
@@ -262,12 +262,12 @@ def profile (request):
 
 #Saves the file in /media/profile_images
 def handle_uploaded_file(url, f):
-    if not os.path.exists('/home/aquaktus/ClassMateZ/media/profile_images/'):
-        os.mkdir('/home/aquaktus/ClassMateZ/media/profile_images/')
+    if not os.path.exists('/home/msalim/ClassMateZ/media/profile_images/'):
+        os.mkdir('/home/msalim/ClassMateZ/media/profile_images/')
 
 
 
-    with open('/home/aquaktus/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+    with open('/home/msalim/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
 
 
 

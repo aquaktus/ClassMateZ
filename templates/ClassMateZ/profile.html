@@ -5,18 +5,20 @@
     <head>
 
     <title>
+            <!-- title profile -->
             {% block title_block %}
                 profile
             {% endblock %}
     </title>
 
+        <!-- stylesheet, js and jQuery -->
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
 
     </head>
     <body>
     {% block body_block %}
-        <h1 style="text-transform:capitalize;">{{ user.username }} Profile</h1><br />
+        <h1 style="text-transform:capitalize;">{{ user.username }} Profile</h1><br /> <!-- to show the username for how oun this Profile -->
             {% if user.is_authenticated %}
                 {% if updated %}
                     <strong>Profile updated!</strong>
@@ -31,12 +33,12 @@
                         <div class="container">
 
                               	<hr>
-                              	<form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:profile' %}" enctype="multipart/form-data">
+                              	<form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:profile' %}" enctype="multipart/form-data"><!-- to show and update username -->
                             	<div class="row">
                                   <!-- left column -->
                                   <div class="col-md-3">
                                     <div class="text-center">
-                                      <img src= {{user_profile.url_fix}} class="avatar img-circle" alt="avatar" width = 200 height = 200> <!-- "//placehold.it/100" -->
+                                      <img src= {{user_profile.url_fix}} class="avatar img-circle" alt="avatar" width = 200 height = 200><!-- to show and update profile image -->
                                       <h6>Upload a different photo...</h6>
 
                                       <input id="file" type="file" name="picture" class="form-control">
@@ -57,17 +59,18 @@
                                       <div class="form-group">
                                         <label class="col-lg-3 control-label">Name:</label>
                                         <div class="col-lg-8">
-                                          <input class="form-control" name="name" type="text" value="{{ user_profile.name }}">
+                                          <input class="form-control" name="name" type="text" value="{{ user_profile.name }}"> <!-- to show and update name -->
                                         </div>
                                       </div>
 
                                       <div class="form-group">
                                         <label class="col-lg-3 control-label">Email:</label>
                                         <div class="col-lg-8">
-                                          <input class="form-control" name="email" type="text" value="{{ user.email }}">
+                                          <input class="form-control" name="email" type="text" value="{{ user.email }}"> <!-- to show and update Email -->
                                         </div>
                                       </div>
 
+                                        <!-- to select Classes -->
                                       <div class="form-group">
                                         <label class="col-lg-3 control-label">Classes:</label>
                                         <div class="col-lg-8">
@@ -84,7 +87,7 @@
                                       <div class="form-group">
                                         <label class="col-md-3 control-label"></label>
                                         <div class="col-md-8">
-                                          <button type="submit" class="btn btn-default" value="submit">Save Changes</button>
+                                          <button type="submit" class="btn btn-default" value="submit">Save Changes</button><!-- submite changes -->
                                           <input type="reset" class="btn btn-default" value="Cancel">
                                         </div>
                                       </div>
@@ -105,6 +108,7 @@
                 <h2>We are sorry, you don't seem to be signed in</h2>
                 {% endif %}
 
+                <!-- fotter -->
                 <div style="bottom: 0px;">ClassMateZ have been coded and desinged for Web Application Development 2 (Team Project). University of Glasgow</div>
 
     {% endblock %}
