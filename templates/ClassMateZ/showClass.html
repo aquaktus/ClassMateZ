@@ -19,11 +19,11 @@
     <h1>Place is {{ classToShow.place.layout.image }}</h1>
     </br>
     <div id="cont" width="100%" height="auto">
-    <img id="layout" src="/media/{{ classToShow.place.layout.image }}" style="overflow: hidden;" width="960" height="540" alt="Planets" usemap="#planetmap">
+    <img id="layout" src="/media/{{ classToShow.place.layout.image }}" style="z-index: -1;" width="960" height="540" alt="Planets" usemap="#planetmap">
 
     <map name="planetmap">
         {% for zoneNbr in nbrOfZones %}
-            <area class="zoneMap" id="zoneMap{{ zoneNbr }}" style="z-index: -1;" shape="poly" coords="" alt="Sun">
+            <area onclick="zoneClicked({{ zoneNbr }})" class="zoneMap" id="zoneMap{{ zoneNbr }}" shape="poly" coords="" alt="Sun">
         {% endfor %}
     </map>
     </div>
@@ -58,18 +58,6 @@
        }
 
 
-       $(".zoneMap").hover(function(){                                                  //this highlighting function is suppose to work, but there seems to be no way to see the effect, no errors
-            /*$(this).attr({
-                "border":"2px solid rgba(0,0,255,.3)"
-            });
-            console.log("hover");*/
-            $('#userTableBody').after('<tr><td></td></tr>');
-          },function(){
-            /*$(this).attr({
-                "border":"2px solid rgba(0,0,0,.3)"
-            });*/
-        });
-
 
     });
     $( window ).resize(function() {
@@ -85,6 +73,18 @@
             $("#zoneMap" + String(i)).attr("coords", newCoords)
        }
     });
+
+    function zoneClicked(zid){
+        $("#userTableBody").empty();
+        {% for zone in zones %}
+            if ({{ zone.zoneNumber }} == zid){
+                console.log("{% for user in zone.users.all %}{{ user.name }}{% endfor %}")
+                $('#userTableBody').html("{% for user in zone.users.all %}<tr><td>{{ user.name }}</td></tr>{% endfor %}");
+
+            }
+
+        {% endfor %}
+    }
 
     </script>
 
