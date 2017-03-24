@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'ClassMateZ/base.html' %}
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>
+            {% block title_block %}
+                Index
+            {% endblock %}
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                $(".clickable-row").click(function() {
+                    window.location = $(this).data("href");
+                });
+            });
+        </script>
+    </head>
+    <body>
+    {% block body_block %}
+        <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;">
+
+        {% if user.is_authenticated %}
+        <dir style="background-color:white; border-radius: 15px; padding: 2px; ">
+            <dir>
+                <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div>
+                </br>
+                <a href="{% url 'app:index' %}">show <b>Today</b></a>
+
+                <dir class="table-responsive">
+                    <table style="" class="table">
+                        <thead style="">
+                            {% for class in userClasses.classes.all %}
+                            <tr>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
+                        </thead>
+                        <tbody style="">
+                            <tr>
+                                <td><a href = "{% url 'app:showClass' class.classId %}">See Class</a></td>
+                            </tr>
+                        </tbody>
+
+                        {% endfor %}
+                    </table>
+
+                    {% else %}
+
+                    <h3>Since you aren't signed in, ClassMateZ has limited functionality</h2>
+
+                    {% endif %}
+                    {% endblock %}
+                </dir>
+            </dir>
+        </dir>
+
+    </body>
+</html>

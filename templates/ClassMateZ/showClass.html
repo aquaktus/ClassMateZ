@@ -11,6 +11,7 @@
         </title>
 
     <body>
+
     {% block body_block %}
     <h1>The class is {{ classToShow.name }}</h1>
     <h1>Place is {{ classToShow.place.layout.image }}</h1>
@@ -39,6 +40,7 @@
             $("#zoneMap" + String(i)).attr("coords", newCoords)
        }
 
+
        $(".zoneMap").hover(function(){                                                  //this highlighting function is suppose to work, but there seems to be no way to see the effect, no errors
             $(this).attr({
                 "border":"2px solid rgba(0,0,255,.3)"
@@ -49,6 +51,7 @@
                 "border":"2px solid rgba(0,0,0,.3)"
             });
         });
+
 
     });
     $( window ).resize(function() {
@@ -69,5 +72,6 @@
     </script>
 
     {% endblock %}
+
     </body>
 </html>

@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from datetime import datetime, date
+import os
 
 def index(request):
 	# Construct a dictionary to pass to the template engine as its context.
@@ -29,6 +30,27 @@ def index(request):
 
 
     response = render(request, 'ClassMateZ/index.html', context_dict)
+	# Call function to handle the cookies
+	# Return response back to the user, updating any cookies that need changed.
+    return response
+
+
+def index_week(request):
+	# Construct a dictionary to pass to the template engine as its context.
+	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
+
+    day = date.today().strftime("%A")
+
+    context_dict = {'day':day}
+
+    if request.user.is_authenticated():
+        print ("Authenticition complete")
+        userClasses = UserProfile.objects.get(user=request.user)
+        context_dict['userClasses'] = userClasses
+        print (userClasses)
+
+
+    response = render(request, 'ClassMateZ/index_week.html', context_dict)
 	# Call function to handle the cookies
 	# Return response back to the user, updating any cookies that need changed.
     return response
@@ -206,23 +228,55 @@ def profile (request):
     updated = False
 
     if user.is_authenticated():
-        print ("Authenticition complete")
-	if request.method == 'POST':
-		profile_form = UserProfileForm(data=request.POST)
-		if profile_form.is_valid():
-			profile = profile_form.save(commit=False)
-			profile.user = user
-			if 'picture' in request.FILES:
-				profile.picture = request.FILES['picture']
-			profile.save()
-			updated = True
-		else:
-			# Invalid form or forms - mistakes or something else?
-			# Print problems to the terminal.
-			print(profile_form.errors)
-	else:
-		profile_form = UserProfileForm()
-    return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form, 'updated': updated})
+        print("Authenticition complete")
+    if request.method == 'POST':
+        data = request.POST
+        print(data)
+        profile_form = UserProfileForm(data=data)
+        print(profile_form, profile_form.is_valid())
+        if profile_form.is_valid():
+            print(data)
+            profile = profile_form.save(commit=False)
+            user_profile.name = profile.name
+            #user_profile.classes = profile.classes
+            print(request.FILES)
+            if 'file' in request.FILES:
+                print(1000000000000)
+                #user_profile.picture = request.FILES['picture']
+            if 'picture' in request.FILES:
+                picture = str(request.FILES.get('picture'))
+                print(str(request.FILES.get('picture',False)), 1000000)
+                handle_uploaded_file(picture, request.FILES['picture'])
+                user_profile.picture = "/profile_images/" + picture
+            user_profile.save()
+            updated = True
+        else:
+            # Invalid form or forms - mistakes or something else?
+            # Print problems to the terminal.
+            print(user_profile.errors)
+        user.email = data.__getitem__("email")
+        user.save()
+    else:
+        profile_form = UserProfileForm(data=data_json)
+    return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form, 'updated': updated, 'user_profile': user_profile})
+
+#Saves the file in /media/profile_images
+def handle_uploaded_file(url, f):
+    if not os.path.exists('/home/aeroniero/ClassMateZ/media/profile_images/'):
+        os.mkdir('/home/aeroniero/ClassMateZ/media/profile_images/')
+
+
+    with open('/home/aeroniero/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+
+        for chunk in f.chunks():
+            destination.write(chunk)
+#Returns a dictonary the includes all the class blocks with the same name
+def find_classes_dict(user):
+    classes = UserProfile.objects.get(user=user).classes
+    classes_dict = {}
+    for class_block in classes:
+        classes_dict[class_block.name] = class_block
+    return classes_dict
 
 def SquadZ (request):
 	print(request.method)
