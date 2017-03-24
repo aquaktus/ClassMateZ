@@ -11,7 +11,6 @@ from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.http import QueryDict
 from datetime import datetime, date
 import os
 
@@ -68,6 +67,12 @@ def showClass(request, classId):
     classToShow = Class.objects.get(classId=classId)
     context_dict['classToShow'] = classToShow
 
+    zonesList = classToShow.place.layout.zoneCoords
+    nbrOfZones = range(len(zonesList.split(";")))
+    context_dict['zonesList'] = zonesList
+    context_dict['nbrOfZones'] = nbrOfZones
+    print(nbrOfZones)
+
     #place =
 
     response = render(request, 'ClassMateZ/showClass.html', context_dict)
@@ -77,47 +82,59 @@ def showClass(request, classId):
 
 
 def register(request):
-    # A boolean value for telling the template
-    # whether the registration was successful.
-    # Set to False initially. Code changes value to
-    # True when registration succeeds.
-    registered = False
-    # If it's a HTTP POST, we're interested in processing form data.
-    print ("registration request received")
-    if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-        # If the two forms are valid...
-        print (user_form)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            profile = profile_form.save(commit=False)
-            print(profile, 10)
-            profile.user = user
-            profile.name = user.username
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-            profile.save()
-            registered = True
-        else:
-            # Invalid form or forms - mistakes or something else?
-            # Print problems to the terminal.
-            print(user_form.errors, profile_form.errors)
-    else:
-        # Not a HTTP POST, so we render our form using two ModelForm instances.
-        # These forms will be blank, ready for user input.
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-        # Render the template depending on the context.
-    return render(request,
-        'ClassMateZ/register.html',
-        {'user_form': user_form,
-        'profile_form': profile_form,
-        'registered': registered})
+	# A boolean value for telling the template
+	# whether the registration was successful.
+	# Set to False initially. Code changes value to
+	# True when registration succeeds.
+	registered = False
+	# If it's a HTTP POST, we're interested in processing form data.
+	print ("registration request received")
+	if request.method == 'POST':
+
+		# Attempt to grab information from the raw form information.
+		# Note that we make use of both UserForm and UserProfileForm.
+		user_form = UserForm(data=request.POST)
+		profile_form = UserProfileForm(data=request.POST)
+		# If the two forms are valid...
+		print (user_form)
+		if user_form.is_valid() and profile_form.is_valid():
+			# Save the user's form data to the database.
+			user = user_form.save()
+			# Now we hash the password with the set_password method.
+			# Once hashed, we can update the user object.
+			user.set_password(user.password)
+			user.save()
+			# Now sort out the UserProfile instance.
+			# Since we need to set the user attribute ourselves,
+			# we set commit=False. This delays saving the model
+			# until we're ready to avoid integrity problems.
+			profile = profile_form.save(commit=False)
+			profile.user = user
+			# Did the user provide a profile picture?
+			# If so, we need to get it from the input form and
+			#put it in the UserProfile model.
+			if 'picture' in request.FILES:
+				profile.picture = request.FILES['picture']
+			# Now we save the UserProfile model instance.
+			profile.save()
+			# Update our variable to indicate that the template
+			# registration was successful.
+			registered = True
+		else:
+			# Invalid form or forms - mistakes or something else?
+			# Print problems to the terminal.
+			print(user_form.errors, profile_form.errors)
+	else:
+		# Not a HTTP POST, so we render our form using two ModelForm instances.
+		# These forms will be blank, ready for user input.
+		user_form = UserForm()
+		profile_form = UserProfileForm()
+		# Render the template depending on the context.
+	return render(request,
+		'ClassMateZ/register.html',
+		{'user_form': user_form,
+		'profile_form': profile_form,
+		'registered': registered})
 
 
 def user_login(request):
@@ -153,13 +170,13 @@ def user_login(request):
 		else:
 			# Bad login details were provided. So we can't log the user in.
 			print("Invalid login details: {0}, {1}".format(username, password))
-			return HttpResponse(reverse('app:index'))
+			return render(request, 'ClassMateZ/index.html', {})
 	# The request is not a HTTP POST, so display the login form.
 	# This scenario would most likely be a HTTP GET.
 	else:
 		# No context variables to pass to the template system, hence the
 		# blank dictionary object...
-		return render(request, 'ClassMateZ/login.html', {})
+		return render(request, 'ClassMateZ/index.html', {})
 
 
 @login_required
@@ -205,12 +222,9 @@ def about (request):
 	print(request.user)
 	return render(request, 'ClassMateZ/about.html', {})
 
-def profile(request):
+def profile (request):
+
     user = request.user
-    user_profile = UserProfile.objects.get(user=user)
-    dict = {'picture': user_profile.picture, 'name': user_profile.name, 'classes': user_profile.classes  }
-    data_json = QueryDict('', mutable=True)
-    data_json.update(dict)
     updated = False
 
     if user.is_authenticated():
@@ -248,17 +262,24 @@ def profile(request):
 
 #Saves the file in /media/profile_images
 def handle_uploaded_file(url, f):
-    if not os.path.exists('/home/aeroniero/ClassMateZ/media/profile_images/'):
-        os.mkdir('/home/aeroniero/ClassMateZ/media/profile_images/')
+    if not os.path.exists('/home/aquaktus/ClassMateZ/media/profile_images/'):
+        os.mkdir('/home/aquaktus/ClassMateZ/media/profile_images/')
 
 
-    with open('/home/aeroniero/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
-      
+
+    with open('/home/aquaktus/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+
+
+
         for chunk in f.chunks():
             destination.write(chunk)
 #Returns a dictonary the includes all the class blocks with the same name
 def find_classes_dict(user):
+
     classes = UserProfile.objects.get(user=user)
+
+    classes = UserProfile.objects.get(user=user).classes
+
     classes_dict = {}
     for class_block in classes:
         classes_dict[class_block.name] = class_block
