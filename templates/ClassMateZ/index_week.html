@@ -19,54 +19,48 @@
         </script>
     </head>
     <body>
-{% block body_block %}
-
-
-
-
-
-    <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;">
-
-
+    {% block body_block %}
+        <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;">
 
         {% if user.is_authenticated %}
-        <dir>
-        <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div>
-        </br>
-        <a href="{% url 'app:index' %}">show <b>Today</b></a>
+        <dir style="background-color:white; border-radius: 15px; padding: 2px; ">
+            <dir>
+                <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div>
+                </br>
+                <a href="{% url 'app:index' %}">show <b>Today</b></a>
 
+                <dir class="table-responsive">
+                    <table style="" class="table">
+                        <thead style="">
+                            {% for class in userClasses.classes.all %}
+                            <tr>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
+                        </thead>
+                        <tbody style="">
+                            <tr>
+                                <td><a href = "{% url 'app:showClass' class.classId %}">See Class</a></td>
+                            </tr>
+                        </tbody>
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-            <th>Sunday</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for class in userClasses.classes.all %}
-              <tr>
-                <td>{{ class.name }}</td>
-                <td>{{ class.time }}</td>
-                <td>{{ class.place }}</td>
-                <td><a href = "{% url 'app:showClass' class.classId %}">See Class</a></td>
-              </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                        {% endfor %}
+                    </table>
 
-    {% else %}
+                    {% else %}
 
-    <h3>Since you aren't signed in, ClassMateZ has limited functionality</h2>
+                    <h3>Since you aren't signed in, ClassMateZ has limited functionality</h2>
 
-    {% endif %}
-{% endblock %}
-</dir>
+                    {% endif %}
+                    {% endblock %}
+                </dir>
+            </dir>
+        </dir>
 
     </body>
 </html>

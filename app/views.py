@@ -251,7 +251,9 @@ def handle_uploaded_file(url, f):
     if not os.path.exists('/home/aeroniero/ClassMateZ/media/profile_images/'):
         os.mkdir('/home/aeroniero/ClassMateZ/media/profile_images/')
 
+
     with open('/home/aeroniero/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+      
         for chunk in f.chunks():
             destination.write(chunk)
 #Returns a dictonary the includes all the class blocks with the same name
