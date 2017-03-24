@@ -19,49 +19,49 @@
         </script>
     </head>
     <body>
-{% block body_block %}
+    {% block body_block %}
+
+        <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;">
 
 
+            <dir style="background-color:white; border-radius: 15px; padding: 2px; ">
 
+                    {% if user.is_authenticated %}
 
+                <dir>
+                        <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div>
+                        </br>
+                        <a href="{% url 'app:index_week' %}">show this <b>week</b></a>
 
-    <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;">
+                    <dir class="table-responsive">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Class</th>
+                                <th>Time</th>
+                                <th>Place</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for class in userClasses.classes.all %}
+                                  <tr>
+                                    <td>{{ class.name }}</td>
+                                    <td>{{ class.time }}</td>
+                                    <td>{{ class.place }}</td>
+                                    <td><a href = "{% url 'app:showClass' class.classId %}">See Class</a></td>
+                                  </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
 
-        <dir  style="padding-bottom:35px;">
-        {% if user.is_authenticated %}
+                        {% else %}
+                        <h3 style="text-align: center;">Since you aren't signed in, ClassMateZ has limited functionality</h3>
+                        {% endif %}
+                        {% endblock %}
+                    </dir>
+                </dir>
+            </dir>
 
-        <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div>
-        </br>
-
-        <a href="{% url 'app:index_week' %}">show this <b>week</b></a>
-
-    <table class="table">
-        <thead>
-          <tr>
-            <th>Class</th>
-            <th>Time</th>
-            <th>Place</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for class in userClasses.classes.all %}
-              <tr>
-                <td>{{ class.name }}</td>
-                <td>{{ class.time }}</td>
-                <td>{{ class.place }}</td>
-                <td><a href = "{% url 'app:showClass' class.classId %}">See Class</a></td>
-              </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    {% else %}
-
-    <h3>Since you aren't signed in, ClassMateZ has limited functionality</h2>
-
-    {% endif %}
-{% endblock %}
-</dir>
 
     </body>
 </html>
