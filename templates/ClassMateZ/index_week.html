@@ -9,6 +9,8 @@
                 Index
             {% endblock %}
         </title>
+
+        <!-- stylesheet, js and jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
             jQuery(document).ready(function($) {
@@ -17,18 +19,21 @@
                 });
             });
         </script>
+
     </head>
     <body>
     {% block body_block %}
-        <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;">
+        <img class="classmatez" src="/media/ClassmateZ.png" style="margin:auto; width:100%; padding:10px; padding-bottom:35px;"> <!-- classmatez Icon -->
 
         {% if user.is_authenticated %}
-        <dir style="background-color:white; border-radius: 15px; padding: 2px; ">
+        <dir style="background-color:white; border-radius: 15px; padding: 2px; "> <!-- background boder for the table and the text(Since you aren't signed in, ClassMateZ has limited functionality)  -->
             <dir>
-                <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div>
+                <div style="font-size:36px; text-transform:capitalize;" >Today is {{day}}</div> <!-- show Day -->
                 </br>
-                <a href="{% url 'app:index' %}">show <b>Today</b></a>
+                <a href="{% url 'app:index' %}">show <b>Today</b></a> <!-- Link to show the week time table -->
 
+
+                <!-- time table start section -->
                 <dir class="table-responsive">
                     <table style="" class="table">
                         <thead style="">
@@ -59,6 +64,8 @@
                     {% endif %}
                     {% endblock %}
                 </dir>
+                <!-- time table start section END -->
+
             </dir>
         </dir>
 

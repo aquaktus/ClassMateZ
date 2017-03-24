@@ -7,6 +7,8 @@ from app.models import Place
 from app.models import Layout
 from app.models import Zone
 
+
+from django.template.context import RequestContext
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
@@ -270,17 +272,24 @@ def profile (request):
 
 #Saves the file in /media/profile_images
 def handle_uploaded_file(url, f):
-    if not os.path.exists('/home/aeroniero/ClassMateZ/media/profile_images/'):
-        os.mkdir('/home/aeroniero/ClassMateZ/media/profile_images/')
+    if not os.path.exists('/home/msalim/ClassMateZ/media/profile_images/'):
+        os.mkdir('/home/msalim/ClassMateZ/media/profile_images/')
 
 
-    with open('/home/aeroniero/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+
+    with open('/home/msalim/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+
+
 
         for chunk in f.chunks():
             destination.write(chunk)
 #Returns a dictonary the includes all the class blocks with the same name
 def find_classes_dict(user):
+
+    classes = UserProfile.objects.get(user=user)
+
     classes = UserProfile.objects.get(user=user).classes
+
     classes_dict = {}
     for class_block in classes:
         classes_dict[class_block.name] = class_block

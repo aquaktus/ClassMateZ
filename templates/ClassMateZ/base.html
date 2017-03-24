@@ -2,51 +2,54 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>
-            ClassMateZ
-            {% block title_block %}
 
+        <!-- title of the base -->
+        <title>
+            {% block title_block %}
+            ClassMateZ base
             {% endblock %}
         </title>
+
+        <!-- stylesheet and Js links -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
 
 
     </head>
     <body>
+
+        <!-- Navigation Bar start -->
         <div class="container" >
 
         <nav class="navbar navbar-inverse">
   <div class="container-fluid" >
     <div class="navbar-header" >
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+
       <a class="navbar-brand" href="/#">ClassMateZ</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
+
+        <!-- href of Home in the Navigation Bar -->
         <li class="active"><a href="/#">Home</a></li>
 
-
-
-        </li>
+        <!-- href of About in the Navigation Bar -->
         <li><a href="{% url 'app:about' %}">About</a></li>
+
+        <!-- authenticated if the user login he will be able to see the profile and SquadZ his name and the Log Out  -->
         {% if user.is_authenticated %}
         <li><a href="{% url 'app:profile' %}">My Account</a></li>
         <li><a href="{% url 'app:SquadZ' %}">SquadZ</a></li>
         {% endif %}
       </ul>
-      <ul class="nav navbar-nav navbar-right">
 
+      <!-- Navigation Bar right section the login(drop down) and the Singup link -->
+      <ul class="nav navbar-nav navbar-right">
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
         <li><p class="navbar-text">Welcome {{ user.username }}!</p></li>
@@ -55,12 +58,15 @@
 
         <li><p class="navbar-text">Already have an account?</p></li>
         <li><a href="/app/register">Sign Up </a></li>
+
+        <!-- the form of the drop login -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 			<ul id="login-dp" class="dropdown-menu">
 				<li>
 				 <div class="row">
 						<div class="col-md-12">
+
 
 							 <form class="form" role="form" method="post" action="{% url 'app:login' %}" accept-charset="UTF-8" id="login-nav">
 							     {% csrf_token %}
@@ -82,22 +88,27 @@
 										 </label>
 									</div>
 							 </form>
+
 						</div>
 					</div>
                 </li>
             </ul>
         {% endif %}
+        </li>
+        <!-- the form of the drop login END -->
+
         </ul>
     </div>
   </div>
 </nav>
 
+            <!-- control the boody length -->
             <div class="jumbotron">
                 {% block body_block %}
                 {% endblock %}
                 <div>
                     <br />
-                    <!--<div style="position: relative;bottom: 0px;">ClassMateZ have been coded and desinged for Web Application Development 2 (Team Project). University of Glasgow</div>-->
+
                 </div>
             </div>
         </div>
