@@ -14,6 +14,7 @@ from django.contrib.auth import logout
 from django.http import QueryDict
 from datetime import datetime, date
 import os
+import itertools
 
 def index(request):
 	# Construct a dictionary to pass to the template engine as its context.
@@ -240,12 +241,11 @@ def profile (request):
     if request.method == 'POST':
         data = request.POST
         print(data)
-        profile_form = UserProfileForm(data=data)
-        print(profile_form, profile_form.is_valid())
-        if profile_form.is_valid():
+        #profile_form = UserProfileForm(data=data)
+        if True: #profile_form.is_valid():
             print(data)
-            profile = profile_form.save(commit=False)
-            user_profile.name = profile.name
+            #profile = profile_form.save(commit=False)
+            user_profile.name = data.get("name")
             #user_profile.classes = profile.classes
             print(request.FILES)
             if 'file' in request.FILES:
@@ -256,6 +256,15 @@ def profile (request):
                 print(str(request.FILES.get('picture',False)), 1000000)
                 handle_uploaded_file(picture, request.FILES['picture'])
                 user_profile.picture = "/profile_images/" + picture
+
+            classes = data.getlist("classes", [])
+            added_classes = []
+            for class_name in classes:
+                added_classes.append(Class.objects.filter(name=class_name))
+            merged = Class.objects.filter(name = "adasdasdaasdasdasdasdfasfsdagdrfgs")
+            for query in added_classes:
+                merged = itertools.chain(merged, query)
+            user_profile.classes = merged
             user_profile.save()
             updated = True
         else:
@@ -266,7 +275,8 @@ def profile (request):
         user.save()
     else:
         profile_form = UserProfileForm(data=data_json)
-    return render(request, 'ClassMateZ/profile.html', {'profile_form': profile_form, 'updated': updated, 'user_profile': user_profile})
+    return render(request, 'ClassMateZ/profile.html', {#'profile_form': profile_form,
+        'updated': updated, 'user_profile': user_profile, 'all_classes': all_classes()})
 
 #Saves the file in /media/profile_images
 def handle_uploaded_file(url, f):
@@ -278,16 +288,26 @@ def handle_uploaded_file(url, f):
             destination.write(chunk)
 
 #Returns a dictonary the includes all the class blocks with the same name
-def find_classes_dict(user):
-
-    classes = UserProfile.objects.get(user=user)
-
-    classes = UserProfile.objects.get(user=user).classes
-
+def find_classes(user):
+    user_profile = UserProfile.objects.get(user=user)
+    print(user_profile.classes)
     classes_dict = {}
-    for class_block in classes:
+    for class_block in user_profile.classes:
         classes_dict[class_block.name] = class_block
     return classes_dict
+
+def all_classes():
+    classes = Class.objects.filter().distinct()
+    '''names = []
+    merged = Class.objects.filter(name="122131231fsdfs1312saf")
+    for class_block in classes:
+        name = class_block.name
+        if name not in names:
+            names.append(class_block.name)
+            merged = itertools.chain(merged, class_block)
+    print(merged)
+    return merged'''
+    return classes
 
 def SquadZ (request):
 	print(request.method)
