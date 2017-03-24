@@ -5,12 +5,14 @@ from app.models import UserProfile
 from app.models import Class
 from app.models import Place
 from app.models import Layout
+from app.models import Zone
 
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.http import QueryDict
 from datetime import datetime, date
 import os
 
@@ -67,9 +69,12 @@ def showClass(request, classId):
     classToShow = Class.objects.get(classId=classId)
     context_dict['classToShow'] = classToShow
 
-    zonesList = classToShow.place.layout.zoneCoords
-    nbrOfZones = range(len(zonesList.split(";")))
-    context_dict['zonesList'] = zonesList
+    zones = Zone.objects.filter(zClass=classToShow)
+    context_dict['zones'] = zones
+
+    zonesCoordList = classToShow.place.layout.zoneCoords
+    nbrOfZones = range(len(zonesCoordList.split(";")))
+    context_dict['zonesCoordList'] = zonesCoordList
     context_dict['nbrOfZones'] = nbrOfZones
     print(nbrOfZones)
 
@@ -223,8 +228,11 @@ def about (request):
 	return render(request, 'ClassMateZ/about.html', {})
 
 def profile (request):
-
     user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    dict = {'picture': user_profile.picture, 'name': user_profile.name, 'classes': user_profile.classes }
+    data_json = QueryDict('', mutable=True)
+    data_json.update(dict)
     updated = False
 
     if user.is_authenticated():
