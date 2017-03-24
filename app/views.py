@@ -296,17 +296,13 @@ def profile (request):
 
 #Saves the file in /media/profile_images
 def handle_uploaded_file(url, f):
-    if not os.path.exists('/home/msalim/ClassMateZ/media/profile_images/'):
-        os.mkdir('/home/msalim/ClassMateZ/media/profile_images/')
-
-
-
-    with open('/home/msalim/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
-
-
-
+    path = os.path.join(MEDIA_DIR, 'profile_images')
+    if not os.path.exists(path):
+        os.mkdir(path)
+    with open(os.path.join(path, url), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
 #Returns a dictonary the includes all the class blocks with the same name
 def find_classes(user):
     user_profile = UserProfile.objects.get(user=user)
