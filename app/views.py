@@ -76,9 +76,20 @@ def showClass(request, classId):
     nbrOfZones = range(len(zonesCoordList.split(";")))
     context_dict['zonesCoordList'] = zonesCoordList
     context_dict['nbrOfZones'] = nbrOfZones
-    print(nbrOfZones)
 
-    #place =
+    user_profile = UserProfile.objects.get(user=request.user)
+
+    if request.method == 'POST':
+		decision = request.POST.get('choice')
+		zoneNbr = request.POST.get('zoneNbr')
+
+		if (zoneNbr != "None"):
+		    if (decision == "1"):
+		        zoneChosen = Zone.objects.get(zClass=classToShow, zoneNumber=int(zoneNbr))
+		        zoneChosen.users.add(user_profile)
+		    elif (decision == "0"):
+		        zoneChosen = Zone.objects.get(zClass=classToShow, zoneNumber=int(zoneNbr))
+		        zoneChosen.users.remove(user_profile)
 
     response = render(request, 'ClassMateZ/showClass.html', context_dict)
 	# Call function to handle the cookies
