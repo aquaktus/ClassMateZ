@@ -5,7 +5,13 @@ from app.models import Class
 from app.models import Place
 from app.models import Layout
 from app.models import Zone
+
+
+
+from django.template.context import RequestContext
+
 from ClassMateZ.settings import MEDIA_DIR
+
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
@@ -126,7 +132,6 @@ def register(request):
 			# until we're ready to avoid integrity problems.
 			profile = profile_form.save(commit=False)
 			profile.user = user
-			profile.name = user.username
 			# Did the user provide a profile picture?
 			# If so, we need to get it from the input form and
 			#put it in the UserProfile model.
