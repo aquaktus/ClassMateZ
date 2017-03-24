@@ -42,8 +42,26 @@
             </table>
         </dir>
     </div>
+    <div>
+        <form class="form-horizontal" id="profile_form" method="post" action="{% url 'app:showClass' classToShow.classId %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" id="zoneNbr" name="zoneNbr" value="0"></div>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="choiceField" name="choice">
+                    <option value="1">Join Zone</option>
+                    <option value="0">Leave Zone</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" value="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
     <script>
     var coordsList = "{{zonesCoordList}}".split(";");
+    var currentZone = 0;
     $(document).ready(function(){
        var result = $("#cont").width();
        $("#layout").width(result).height(result*0.5625);
@@ -75,6 +93,9 @@
     });
 
     function zoneClicked(zid){
+        currentZone = zid;
+        $("#zoneNbr").val(String(currentZone));
+        console.log($("#zoneNbr").val());
         $("#userTableBody").empty();
         {% for zone in zones %}
             if ({{ zone.zoneNumber }} == zid){

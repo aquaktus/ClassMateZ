@@ -5,7 +5,13 @@ from app.models import Class
 from app.models import Place
 from app.models import Layout
 from app.models import Zone
+
+
+
+from django.template.context import RequestContext
+
 from ClassMateZ.settings import MEDIA_DIR
+
 from app.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
@@ -76,9 +82,20 @@ def showClass(request, classId):
     nbrOfZones = range(len(zonesCoordList.split(";")))
     context_dict['zonesCoordList'] = zonesCoordList
     context_dict['nbrOfZones'] = nbrOfZones
-    print(nbrOfZones)
 
-    #place =
+    user_profile = UserProfile.objects.get(user=request.user)
+
+    if request.method == 'POST':
+		decision = request.POST.get('choice')
+		zoneNbr = request.POST.get('zoneNbr')
+
+		if (zoneNbr != "None"):
+		    if (decision == "1"):
+		        zoneChosen = Zone.objects.get(zClass=classToShow, zoneNumber=int(zoneNbr))
+		        zoneChosen.users.add(user_profile)
+		    elif (decision == "0"):
+		        zoneChosen = Zone.objects.get(zClass=classToShow, zoneNumber=int(zoneNbr))
+		        zoneChosen.users.remove(user_profile)
 
     response = render(request, 'ClassMateZ/showClass.html', context_dict)
 	# Call function to handle the cookies
@@ -115,7 +132,6 @@ def register(request):
 			# until we're ready to avoid integrity problems.
 			profile = profile_form.save(commit=False)
 			profile.user = user
-			profile.name = user.username
 			# Did the user provide a profile picture?
 			# If so, we need to get it from the input form and
 			#put it in the UserProfile model.
@@ -280,13 +296,17 @@ def profile (request):
 
 #Saves the file in /media/profile_images
 def handle_uploaded_file(url, f):
-    path = os.path.join(MEDIA_DIR, 'profile_images')
-    if not os.path.exists(path):
-        os.mkdir(path)
-    with open(os.path.join(path, url), 'wb+') as destination:
+    if not os.path.exists('/home/msalim/ClassMateZ/media/profile_images/'):
+        os.mkdir('/home/msalim/ClassMateZ/media/profile_images/')
+
+
+
+    with open('/home/msalim/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
+
+
+
         for chunk in f.chunks():
             destination.write(chunk)
-
 #Returns a dictonary the includes all the class blocks with the same name
 def find_classes(user):
     user_profile = UserProfile.objects.get(user=user)
