@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
@@ -136,7 +137,7 @@ STATIC_URL = '/static/'
 
 # default static files settings for PythonAnywhere.
 # see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
-MEDIA_ROOT = u'/home/aquaktus/ClassMateZ/media'
+MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-STATIC_ROOT = u'/home/aquaktus/ClassMateZ/static'
+STATIC_ROOT = u'/home/msalim/ClassMateZ/static'
 STATIC_URL = '/static/'
