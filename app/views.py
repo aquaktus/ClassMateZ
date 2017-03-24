@@ -253,12 +253,12 @@ def handle_uploaded_file(url, f):
 
 
     with open('/home/aeroniero/ClassMateZ/media/profile_images/' + url, 'wb+') as destination:
-      
+
         for chunk in f.chunks():
             destination.write(chunk)
 #Returns a dictonary the includes all the class blocks with the same name
 def find_classes_dict(user):
-    classes = UserProfile.objects.get(user=user)
+    classes = UserProfile.objects.get(user=user).classes
     classes_dict = {}
     for class_block in classes:
         classes_dict[class_block.name] = class_block
