@@ -132,6 +132,7 @@ def register(request):
 			# until we're ready to avoid integrity problems.
 			profile = profile_form.save(commit=False)
 			profile.user = user
+			profile.name = user.username
 			# Did the user provide a profile picture?
 			# If so, we need to get it from the input form and
 			#put it in the UserProfile model.
