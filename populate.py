@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from app.models import Layout, Place, Class
+from app.models import Layout, Place, Class, Zone
 from datetime import datetime
 from django.db import models
 
@@ -37,7 +37,17 @@ def populate():
     clases = [
         {"name":"ADS2",
          "day":1,
-         "place": "Boyd Orr 222"} ]
+         "classId": "ads2-mon",
+         "place": "Boyd Orr 222"},
+        {"name":"Joose",
+         "day":2,
+         "classId": "Joose-tue",
+         "place": "Adam Smith 1115"},
+        {"name":"Embedded System",
+         "day":3,
+         "classId": "EMB-wed",
+         "place": "Adam Smith 718"}
+         ]
 
 
     for layout in layouts:
@@ -49,7 +59,7 @@ def populate():
         print(place["name"])
 
     for classToCreate in clases:
-        add_class(classToCreate["name"], classToCreate["day"], classToCreate["place"])
+        add_class(classToCreate["name"], classToCreate["day"], classToCreate["place"], classToCreate["classId"])
         print(classToCreate["name"])
 
 def add_layout(name, coords, url):
@@ -62,8 +72,15 @@ def add_layout(name, coords, url):
 def add_place(name, address, layout):
     Place.objects.get_or_create(name=name, address=address, layout=Layout.objects.get(layoutName=layout))
 
-def add_class(name, day, place):
-    Class.objects.get_or_create(name=name, day=day, place=Place.objects.get(name=place))
+def add_class(name, day, place_name, classId):
+    place = Place.objects.get(name=place_name)
+    zoneCoords = place.layout.zoneCoords;
+    zonesNum = len(zoneCoords.split(";"))
+    Class.objects.get_or_create(name=name, day=day, place=Place.objects.get(name=place), classId = classId)
+    zClass = Class.objects.get(name=name, day = day, place=place, classId = classId)
+    for i in range(zonesNum):
+        zone = Zone.objects.get_or_create(zClass = zClass, zoneNumber = i+1)
+        print zone
 
 
 # Start execution here!
