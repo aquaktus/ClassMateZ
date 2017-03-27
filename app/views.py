@@ -139,6 +139,10 @@ def register(request):
 				profile.picture = request.FILES['picture']
 			# Now we save the UserProfile model instance.
 			profile.save()
+			password = request.POST.get('password', None)
+			authenticated = authenticate(username=user.username, password=password)
+			if authenticated:
+			    login(request, authenticated)
 			# Update our variable to indicate that the template
 			# registration was successful.
 			registered = True
