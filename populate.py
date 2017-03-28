@@ -82,8 +82,8 @@ def add_class(name, day, place_name, classId):
     zonesNum = len(zoneCoords.split(";"))
     Class.objects.get_or_create(name=name, day=day, place=Place.objects.get(name=place), classId = classId)
     zClass = Class.objects.get(name=name, day = day, place=place, classId = classId)
-    for i in range(zonesNum):
-        zone = Zone.objects.get_or_create(zClass = zClass, zoneNumber = i+1)
+    for i in range(zonesNum + 1):
+        zone = Zone.objects.get_or_create(zClass = zClass, zoneNumber = i)
         print zone
 
 
